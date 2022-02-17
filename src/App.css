@@ -1,0 +1,188 @@
+#content {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 55rem;
+}
+
+header {
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  border-bottom: solid 1px rgb(39, 50, 62);
+  color: rgb(236, 233, 230);
+}
+
+main {
+  border-left: solid 1px;
+  border-right: solid 1px;
+  border-color: rgb(39, 50, 62);
+  min-height: 100vh;
+  margin-left: 16rem;
+}
+
+aside {
+  position: fixed;
+  width: 13rem;
+  padding-left: 1rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+.darkRow {
+	text-align: center;
+	padding-top: 1rem;
+  padding-bottom: 1rem;
+	padding-left: 2rem;
+  padding-right: 2rem;
+	background-color: rgb(23, 36, 48);
+	border-bottom: solid 1px rgb(39, 50, 62);
+	color: rgb(75, 89, 105);
+}
+
+
+.searchIcon {
+  color: rgb(156, 163, 175);
+  padding-left: 2rem;
+  padding-right: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  position: absolute;
+  padding-bottom: 0.2rem;
+}
+
+.searchIcon svg {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.searchInput {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  position: relative;
+}
+
+.searchInput input {
+  width: 100%;
+  text-align: center;
+	padding-top: 1rem;
+  padding-bottom: 1rem;
+	padding-left: 4rem;
+  padding-right: 4rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: 0px;
+	background-color: rgb(23, 36, 48);
+	border-bottom: solid 1px rgb(39, 50, 62);
+  color: rgb(156, 163, 175);
+  border-style: solid;
+  outline-color: rgb( 80, 162, 255);
+  text-align: left;
+}
+
+.searchButton {
+  padding-right: 1.5rem;
+  align-items: center;
+  display: flex;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  position: absolute;
+}
+
+#loadingProgressG{
+	width:100%;
+	height:1px;
+	overflow:hidden;
+	background-color:rgba(80,162,255, 0.4);
+	margin:auto;
+}
+
+.loadingProgressG{
+	background-color:rgb(80,162,255);
+	margin-top:0;
+	margin-left:-622px;
+	animation-name:bounce_loadingProgressG;
+		-o-animation-name:bounce_loadingProgressG;
+		-ms-animation-name:bounce_loadingProgressG;
+		-webkit-animation-name:bounce_loadingProgressG;
+		-moz-animation-name:bounce_loadingProgressG;
+	animation-duration:2.9s;
+		-o-animation-duration:2.9s;
+		-ms-animation-duration:2.9s;
+		-webkit-animation-duration:2.9s;
+		-moz-animation-duration:2.9s;
+	animation-iteration-count:infinite;
+		-o-animation-iteration-count:infinite;
+		-ms-animation-iteration-count:infinite;
+		-webkit-animation-iteration-count:infinite;
+		-moz-animation-iteration-count:infinite;
+	animation-timing-function:linear;
+		-o-animation-timing-function:linear;
+		-ms-animation-timing-function:linear;
+		-webkit-animation-timing-function:linear;
+		-moz-animation-timing-function:linear;
+	width:100%;
+	height:6px;
+}
+
+
+
+@keyframes bounce_loadingProgressG{
+	0%{
+		margin-left:-622px;
+	}
+
+	100%{
+		margin-left:622px;
+	}
+}
+
+@-o-keyframes bounce_loadingProgressG{
+	0%{
+		margin-left:-622px;
+	}
+
+	100%{
+		margin-left:622px;
+	}
+}
+
+@-ms-keyframes bounce_loadingProgressG{
+	0%{
+		margin-left:-622px;
+	}
+
+	100%{
+		margin-left:622px;
+	}
+}
+
+@-webkit-keyframes bounce_loadingProgressG{
+	0%{
+		margin-left:-622px;
+	}
+
+	100%{
+		margin-left:622px;
+	}
+}
+
+@-moz-keyframes bounce_loadingProgressG{
+	0%{
+		margin-left:-622px;
+	}
+
+	100%{
+		margin-left:622px;
+	}
+}

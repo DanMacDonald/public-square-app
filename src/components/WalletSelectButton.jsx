@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArweaveWebWallet } from 'arweave-wallet-connector';
 import "./walletSelectButton.css";
 
@@ -20,10 +20,15 @@ export const WalletSelectButton = (props) => {
   const [showModal, setShowModal] = React.useState(false);
   const [activeWallet, setActiveWalelt] = React.useState(NONE);
   const [addressText, setAddressText] = React.useState("xxxxx...xxx");
-  const [webWallet] = React.useState(new TutorialWebWallet({
-    name: 'PublicSquare Tutorial',
-    logo: 'https://jfbeats.github.io/ArweaveWalletConnector/placeholder.svg',
-  }, 'arweave.app'));
+  const [webWallet, setWebWallet] = React.useState(null);
+
+  useEffect(() =>  {
+    console.log('Instantiating wallet');
+    setWebWallet(new TutorialWebWallet({
+      name: 'PublicSquare Tutorial',
+      logo: 'https://jfbeats.github.io/ArweaveWalletConnector/placeholder.svg',
+    }, 'arweave.app'))
+  }, [])
 
   async function onWalletSelected(walletName) {
     let address = await window.arweaveWallet.getActiveAddress();
@@ -48,7 +53,7 @@ const WalletButton = (props) => {
   switch(props.walletName) {
     case AR_CONNECT:
       return (<div className="walletButton" >
-          <img src="ArConnect_Logo.svg" alt="wallet icon" />
+          <img src="ArConnect_Logo.png" alt="wallet icon" />
           <p>{props.walletAddress}</p>
         </div>)
     case ARWEAVE_APP:
@@ -91,7 +96,7 @@ const WalletModal = (props) => {
         <div className="buttonList">
           <button className="select-button" onClick={() => connectWallet(AR_CONNECT)}>
             <p>ArConnect</p>
-            <img src="ArConnect_logo.svg" alt="ArConnect icon"/>
+            <img src="ArConnect_Logo.png" alt="ArConnect icon"/>
           </button>
           <button className="select-button" onClick={() => connectWallet(ARWEAVE_APP)}>
             <p>Arweave.app</p>

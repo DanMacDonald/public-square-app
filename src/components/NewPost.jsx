@@ -1,8 +1,6 @@
 import React from 'react'
 import TextareaAutosize from 'react-textarea-autosize';
-
-import Arweave from 'arweave';
-import { getTopicString } from '../lib/api';
+import { arweave, getTopicString } from '../lib/api';
 
 export const NewPost = (props) => {
   const [topicValue, setTopicValue] = React.useState("");
@@ -16,7 +14,6 @@ export const NewPost = (props) => {
 
   async function onPostButtonClicked() {
     setIsPosting(true);
-    let arweave = Arweave.init({});
     let tx = await arweave.createTransaction({ data:postValue })
 
     tx.addTag('App-Name', 'PublicSquare')

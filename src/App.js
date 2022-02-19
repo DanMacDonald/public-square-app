@@ -7,11 +7,8 @@ import { Posts } from './components/Posts';
 import { ProgressSpinner } from './components/ProgressSpinner';
 import { TopicSearch } from './components/TopicSearch';
 import { UserSearch } from './components/UserSearch';
-import { buildQuery, createPost, delay, delayResults } from './lib/api';
+import { arweave, buildQuery, createPost, delay, delayResults } from './lib/api';
 import './App.css';
-
-import Arweave from 'arweave';
-const arweave = Arweave.init({});
 
 async function waitForNewPosts(txid) {
   let count = 0;

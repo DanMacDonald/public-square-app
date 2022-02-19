@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { abbreviateAddress, getPostTime } from '../lib/api';
-import Arweave from 'arweave';
-const arweave = Arweave.init({});
 
 export const Posts = (props) => {
   return (
@@ -23,7 +21,6 @@ const PostItem = (props) => {
     let newStatus = "";
 
     const getMessage = async () => {
-      const txid = props.item.txid;
       const response = await props.item.request;
       if (response && response.status && response.status === 200) {
         props.item.message = response.data;
@@ -47,7 +44,7 @@ const PostItem = (props) => {
       return () => isCancelled = true;
     }
     
-  }, []);
+  }, [props.item]);
 
   const renderTopic = (topic) => {
     if (topic)

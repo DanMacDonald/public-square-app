@@ -22,11 +22,14 @@ const PostItem = (props) => {
 
     const getMessage = async () => {
       const response = await props.item.request;
-      if (response && response.status && response.status === 200) {
+      if (!response) {
+        newStatus = props.item.error;
+      }
+      else if (response.status && response.status === 200) {
         props.item.message = response.data;
         newStatus = "";
         newPostMessage = response.data;
-      } else if (!newStatus) {
+      } else {
         newStatus = "missing data";
       }
     }

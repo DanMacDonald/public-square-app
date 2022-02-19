@@ -32,7 +32,12 @@ export const NewPost = (props) => {
     }
     
     try {
-      await arweave.transactions.sign(tx);
+      let err = await arweave.transactions.sign(tx);
+      if (err) {
+        console.log(err.message);
+        setIsPosting(false);
+        return;
+      } 
     } catch (err) {
       console.log(err);
       setIsPosting(false);

@@ -182,6 +182,7 @@ textarea {
 	margin-left: 0.5rem;
 	width: 100%;
 	word-break: break-all;
+  line-height: 1.3rem;
 }
 
 .profileImage {
@@ -228,6 +229,7 @@ time {
 .status {
 	color: rgb(85, 99, 116);
 	font-size: 0.875rem;
+  line-height: 1.3rem;
 }
 #element::-webkit-scrollbar {
   display: none;

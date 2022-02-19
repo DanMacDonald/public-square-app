@@ -37,7 +37,7 @@ export const buildQuery = ({count, address, topic}) => {
     },`
   }
 
-  return { query: `{
+  const queryObject = { query: `{
     transactions(first: ${count}, ${ownersFilter}
       tags: [
         {
@@ -72,6 +72,8 @@ export const buildQuery = ({count, address, topic}) => {
       }
     }
   }`}
+  console.log(queryObject.query);
+  return queryObject;
 }
 
 // in miliseconds
@@ -114,11 +116,5 @@ export const delay = (t) => {
     setTimeout(function() {
       resolve();
     }, t);
-  });
-}
-
-export const waitToDisplay = (results) => {
-  return delay(300).then(function() {
-    return results;
   });
 }

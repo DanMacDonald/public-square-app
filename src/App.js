@@ -7,9 +7,11 @@ import { Posts } from './components/Posts';
 import { ProgressSpinner } from './components/ProgressSpinner';
 import { TopicSearch } from './components/TopicSearch';
 import { UserSearch } from './components/UserSearch';
-import { buildQuery, createPost, delay, waitToDisplay } from './lib/api';
+import { buildQuery, createPost, delay } from './lib/api';
 import './App.css';
+
 import Arweave from 'arweave';
+const arweave = Arweave.init({});
 
 async function waitForNewPosts(txid) {
   let count = 0;
@@ -29,26 +31,14 @@ async function waitForNewPosts(txid) {
   return posts;
 }
 
-function getPosts(ownerAddress, topic) {
-  console.log("getting posts from arweave");
-  let arweave = Arweave.init({});
+async function getPosts(ownerAddress, topic) {
   const query = buildQuery({address: ownerAddress, topic});
-  console.log(query.query);
-  return arweave.api.post('/graphql', query)
-  .then(results => {
-    let edges = results.data.data.transactions.edges;
-    console.log(`${edges.length} posts to load`);
-    return Promise.all(edges.map(async (edge) => {
-      const txid = edge.node.id;
-      return createPost(edge.node);
-    }));
-  })
-  .then(posts => {
-    return waitToDisplay(posts)
-  })
-  .catch(err => {
-    console.log(`GraphQL query failed`);
-  })
+  const results = await arweave.api.post('/graphql', query)
+    .catch(err => {
+      console.log(`GraphQL query failed - ${err}`);
+    });
+  let edges = results.data.data.transactions.edges;
+  return Promise.all(edges.map( edge => createPost(edge.node)));
 }
 
 const App = () => {

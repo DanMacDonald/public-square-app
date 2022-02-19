@@ -15,38 +15,46 @@ export const Posts = (props) => {
 };
 
 const PostItem = (props) => {
-  const [postMessage, setPostMessage] = React.useState("");
+  const [postMessage, setPostMessage] = React.useState('s'.repeat(Math.max(props.item.length - 75,0)));
   const [statusMessage, setStatusMessage] = React.useState("");
 
   React.useEffect(() => {
     if (!props.item.message) {
       setStatusMessage("loading...");
+    }
 
-      if (!props.item.request) {
-        let isCancelled = false;
-        const txid = props.item.txid;
+    let newPostMessage = "";
+    let newStatus = "";
 
-        props.item.request = arweave.api.get(`/${txid}`, { timeout: 10000 })
-          .then(response => {
-            if (!isCancelled) {
-              if (response.status && response.status === 200) {
-                props.item.message = response.data;
-                setStatusMessage("");
-                setPostMessage(response.data);
-              } else {
-                setStatusMessage("missing data");
-              }
-            }
-          }).catch(err => {
-            if (!isCancelled)
-              setStatusMessage("timeout loading data");
-          })
+    const getMessage = async () => {
+      const txid = props.item.txid;
+      props.item.request = true;
+      const response = await arweave.api.get(`/${txid}`, { timeout: 10000 })
+        .catch(() => {
+          newStatus = "timeout loading data";
+        });
 
-        return () => isCancelled = true;
+      if (response && response.status && response.status === 200) {
+        props.item.message = response.data;
+        newStatus = "";
+        newPostMessage = response.data;
+      } else if (!newStatus) {
+        newStatus = "missing data";
       }
     }
 
-  }, [props.item]);
+    if (!props.item.request) {
+      let isCancelled = false;
+      getMessage()
+        .then(() => {
+          if (isCancelled)
+            return;
+          setStatusMessage(newStatus);
+          setPostMessage(newPostMessage);
+        });
+      return () => isCancelled = true;
+    }
+  }, []);
 
   const renderTopic = (topic) => {
     if (topic)

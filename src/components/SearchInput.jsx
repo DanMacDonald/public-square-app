@@ -4,11 +4,16 @@ export const SearchInput = (props) => {
 	const [searchInput, setSearchInput] = React.useState(props.searchInput);
 	const [isDisabled, setIsDisabled] = React.useState(true);
 	const onSearchInputChange = (e) =>  {
-	  setSearchInput(e.target.value);
+    let input = e.target.value;
 	  let isInputValid = false;
+    if (props.onInputChanged) {
+      input = props.onInputChanged(e);
+    }
+
 	  if (props.isInputValid) {
-		isInputValid = props.isInputValid(e.target.value);
+		  isInputValid = props.isInputValid(e.target.value);
 	  }
+    setSearchInput(input);
 	  setIsDisabled(!isInputValid)
 	}
   

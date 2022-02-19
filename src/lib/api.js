@@ -114,6 +114,15 @@ export const abbreviateAddress = (address) => {
   return `${firstFive}..${lastFour }`;
 }
 
+export const getTopicString = (input) => {
+  let dashedTopic = (input || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9 -]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+  return dashedTopic;
+}
+
 export const delay = (t) => {
   return new Promise(function(resolve) {
     setTimeout(function() {

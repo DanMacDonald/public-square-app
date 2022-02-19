@@ -2,18 +2,15 @@ import React from 'react'
 import TextareaAutosize from 'react-textarea-autosize';
 
 import Arweave from 'arweave';
+import { getTopicString } from '../lib/api';
 
 export const NewPost = (props) => {
   const [topicValue, setTopicValue] = React.useState("");
   const [postValue, setPostValue] = React.useState("");
   const [isPosting, setIsPosting] = React.useState(false);
   function onTopicChanged(e) {
-    let topic = e.target.value;
-    let dashedTopic = (topic || '')
-      .toLowerCase()
-      .replace(/[^a-z0-9 -]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
+    let input = e.target.value;
+    let dashedTopic = getTopicString(input);
     setTopicValue(dashedTopic);
   }
 

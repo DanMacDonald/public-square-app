@@ -1,8 +1,15 @@
 import { SearchInput } from './SearchInput'
-import { useNavigate } from 'react-router-dom';
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { getTopicString } from '../lib/api';
 
 export const TopicSearch = (props) => {
 	const navigate = useNavigate();
+  function onTopicChanged(e) {
+    let input = e.target.value;
+    return getTopicString(input);
+  }
+
 	const onTopicSearch = (topic) => {
 		navigate(`/topics/${topic}`);
 	}
@@ -15,6 +22,7 @@ export const TopicSearch = (props) => {
 		prompt="enter topic" 
 		searchInput={props.searchInput ? props.searchInput : ""}
 		isInputValid={input => input.length > 0} // Non 0 length input is valid
+    onInputChanged={onTopicChanged}
 		onSearch={onTopicSearch}
 		/>
 	)

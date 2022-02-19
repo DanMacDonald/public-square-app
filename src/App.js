@@ -32,11 +32,11 @@ async function getPosts(ownerAddress, topic) {
   const query = buildQuery({address: ownerAddress, topic});
   const results = await arweave.api.post('/graphql', query)
     .catch(err => {
-      console.log(`GraphQL query failed - ${err}`);
+      console.error('GraphQL query failed', err);
+      throw new Error(err);
     });
-  let edges = results.data.data.transactions.edges;
-  const posts = edges.map(edge => createPost(edge.node));
-  return await delayResults(100, posts)
+  const edges = results.data.data.transactions.edges;
+  return edges.map(edge => createPost(edge.node));
 }
 
 const App = () => {

@@ -1,3 +1,6 @@
+import Arweave from 'arweave';
+const arweave = Arweave.init({});
+
 export const isWellFormattedAddress = (input) => {
   const re = /^[a-zA-Z0-9_]{43}$/;
   return re.test(input);
@@ -12,7 +15,7 @@ export const createPost = (node) => {
   return {
     txid: node.id,
     owner: ownerAddress,
-    request: null,
+    request: arweave.api.get(`/${node.id}`, { timeout: 10000 }).catch(() => {}),
     topic: topic,
     height: height,
     length: node.data.size,
@@ -116,5 +119,11 @@ export const delay = (t) => {
     setTimeout(function() {
       resolve();
     }, t);
+  });
+}
+
+export const delayResults = (milliseconds, results) => {
+  return delay(milliseconds).then(function() {
+    return results;
   });
 }

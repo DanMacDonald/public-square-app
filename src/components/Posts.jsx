@@ -19,21 +19,12 @@ const PostItem = (props) => {
   const [statusMessage, setStatusMessage] = React.useState("");
 
   React.useEffect(() => {
-    if (!props.item.message) {
-      setStatusMessage("loading...");
-    }
-
     let newPostMessage = "";
     let newStatus = "";
 
     const getMessage = async () => {
       const txid = props.item.txid;
-      props.item.request = true;
-      const response = await arweave.api.get(`/${txid}`, { timeout: 10000 })
-        .catch(() => {
-          newStatus = "timeout loading data";
-        });
-
+      const response = await props.item.request;
       if (response && response.status && response.status === 200) {
         props.item.message = response.data;
         newStatus = "";
@@ -43,17 +34,19 @@ const PostItem = (props) => {
       }
     }
 
-    if (!props.item.request) {
+    if (!props.item.message) {
+      setStatusMessage("loading...");
       let isCancelled = false;
-      getMessage()
-        .then(() => {
-          if (isCancelled)
-            return;
-          setStatusMessage(newStatus);
-          setPostMessage(newPostMessage);
-        });
+        getMessage()
+          .then(() => {
+            if (isCancelled)
+              return;
+            setStatusMessage(newStatus);
+            setPostMessage(newPostMessage);
+          });
       return () => isCancelled = true;
     }
+    
   }, []);
 
   const renderTopic = (topic) => {

@@ -7,7 +7,7 @@ import { Posts } from './components/Posts';
 import { ProgressSpinner } from './components/ProgressSpinner';
 import { TopicSearch } from './components/TopicSearch';
 import { UserSearch } from './components/UserSearch';
-import { buildQuery, createPost, delay } from './lib/api';
+import { buildQuery, createPost, delay, delayResults } from './lib/api';
 import './App.css';
 
 import Arweave from 'arweave';
@@ -38,7 +38,8 @@ async function getPosts(ownerAddress, topic) {
       console.log(`GraphQL query failed - ${err}`);
     });
   let edges = results.data.data.transactions.edges;
-  return Promise.all(edges.map( edge => createPost(edge.node)));
+  const posts = edges.map(edge => createPost(edge.node));
+  return await delayResults(100, posts)
 }
 
 const App = () => {

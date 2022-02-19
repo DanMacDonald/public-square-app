@@ -153,7 +153,7 @@ textarea {
 /* Posts ==================================================================== */
 .postItem {
 	padding-top: 1rem;
-    padding-bottom: 1rem;
+  padding-bottom: 1rem;
 	padding-left: 1rem;
 	padding-right: 2rem;
 	border-bottom: solid 1px rgb(39, 50, 62);
@@ -181,15 +181,16 @@ textarea {
 	font-weight: 400;
 	margin-left: 0.5rem;
 	width: 100%;
-	word-break: break-all;
+	word-break:normal;
   line-height: 1.3rem;
 }
 
 .profileImage {
 	width: 48px;
-    height: 48px;
-    border-radius: 100%;
-    color: transparent;
+  min-width: 48px;
+  height: 48px;
+  border-radius: 100%;
+  color: transparent;
 	vertical-align: top;
 }
 
@@ -205,7 +206,7 @@ textarea {
 time {
 	color: rgb(85, 99, 116);
 	font-size: 0.875rem;
-    line-height: 1.25rem;
+  line-height: 1.25rem;
 	font-weight: 500;
 }
 
@@ -216,8 +217,8 @@ time {
 	color: rgb( 80, 162, 255);
 	padding: 0px;
 	font-weight: 500;
-    margin-left: 0.5rem;
-    width: 100%;
+  margin-left: 0.5rem;
+  width: 100%;
 	font-size: 1rem;
 	text-decoration: none;
 }

@@ -13,37 +13,36 @@ export const Posts = (props) => {
 };
 
 const PostItem = (props) => {
-  const [postMessage, setPostMessage] = React.useState('s'.repeat(Math.max(props.item.length - 75,0)));
+  const [postMessage, setPostMessage] = React.useState('s'.repeat(Math.max(props.item.length - 75, 0)));
   const [statusMessage, setStatusMessage] = React.useState("");
 
   React.useEffect(() => {
     let newPostMessage = "";
     let newStatus = "";
-
-    const getMessage = async () => {
-      const response = await props.item.request;
-      if (!response) {
-        newStatus = props.item.error;
-      }
-      else if (response.status && response.status === 200) {
-        props.item.message = response.data;
-        newStatus = "";
-        newPostMessage = response.data;
-      } else {
-        newStatus = "missing data";
-      }
-    }
-
+    
     if (!props.item.message) {
       setStatusMessage("loading...");
       let isCancelled = false;
-        getMessage()
-          .then(() => {
-            if (isCancelled)
-              return;
-            setStatusMessage(newStatus);
-            setPostMessage(newPostMessage);
-          });
+
+      const getMessage = async () => {
+        const response = await props.item.request;
+        if (!response) {
+          newStatus = props.item.error;
+        } else if (response.status && response.status === 200) {
+          props.item.message = response.data;
+          newStatus = "";
+          newPostMessage = response.data;
+        } else {
+          newStatus = "missing data";
+        }
+
+        if (isCancelled)
+          return;
+        setStatusMessage(newStatus);
+        setPostMessage(newPostMessage);
+      }
+
+      getMessage();
       return () => isCancelled = true;
     }
     

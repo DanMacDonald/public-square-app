@@ -181,7 +181,7 @@ textarea {
 	font-weight: 400;
 	margin-left: 0.5rem;
 	width: 100%;
-	word-break:normal;
+	word-break:break-word;
   line-height: 1.3rem;
 }
 

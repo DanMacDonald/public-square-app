@@ -36,7 +36,7 @@ async function getPosts(ownerAddress, topic) {
       throw new Error(err);
     });
   const edges = results.data.data.transactions.edges;
-  return edges.map(edge => createPost(edge.node));
+  return await delayResults(100,edges.map(edge => createPost(edge.node)));
 }
 
 const App = () => {

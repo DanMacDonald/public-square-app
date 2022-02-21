@@ -61,7 +61,7 @@ const WalletModal = (props) => {
         await window.arweaveWallet.connect(['ACCESS_ADDRESS','SIGN_TRANSACTION']);
         break;
       case ARWEAVE_APP:
-        if (webWallet.address === undefined) { await webWallet.connect(); }
+        await webWallet.connect();
         break;
       default:
         throw new Error(`Attempted to connect unknown wallet ${walletName}`);

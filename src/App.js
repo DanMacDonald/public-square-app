@@ -7,7 +7,7 @@ import { Posts } from './components/Posts';
 import { ProgressSpinner } from './components/ProgressSpinner';
 import { TopicSearch } from './components/TopicSearch';
 import { UserSearch } from './components/UserSearch';
-import { arweave, buildQuery, createPost, delay, delayResults } from './lib/api';
+import { arweave, buildQuery, createPostData, delay, delayResults } from './lib/api';
 import './App.css';
 
 async function waitForNewPosts(txid) {
@@ -36,7 +36,7 @@ async function getPosts(ownerAddress, topic) {
       throw new Error(err);
     });
   const edges = results.data.data.transactions.edges;
-  return await delayResults(100,edges.map(edge => createPost(edge.node)));
+  return await delayResults(100,edges.map(edge => createPostData(edge.node)));
 }
 
 const App = () => {

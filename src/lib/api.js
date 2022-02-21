@@ -6,7 +6,7 @@ export const isWellFormattedAddress = (input) => {
   return re.test(input);
 }
 
-export const createPost = (node) => {
+export const createPostData = (node) => {
   const ownerAddress = node.owner.address;
   const height = node.block ? node.block.height : -1;
   const topicTag = node.tags && node.tags.find((a) => a.name === 'Topic');
@@ -15,11 +15,11 @@ export const createPost = (node) => {
   const postItem = {
     txid: node.id,
     owner: ownerAddress,
-    request: null,
     topic: topic,
     height: height,
     length: node.data.size,
     timestamp: timestamp,
+    request: null,
   }
   postItem.request = arweave.api.get(`/${node.id}`, { timeout: 10000 })
     .catch(() => { postItem.error = "timeout loading data"});

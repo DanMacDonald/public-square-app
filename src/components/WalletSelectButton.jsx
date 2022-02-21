@@ -2,33 +2,19 @@ import React, { useEffect } from 'react';
 import { ArweaveWebWallet } from 'arweave-wallet-connector';
 import "./walletSelectButton.css";
 
+const webWallet = new ArweaveWebWallet({
+  name: 'PublicSquare Tutorial',
+  logo: 'https://jfbeats.github.io/ArweaveWalletConnector/placeholder.svg',
+}, 'arweave.app');
+
 const NONE = "None";
 const AR_CONNECT = "ArConnect";
 const ARWEAVE_APP = "ArweaveApp";
-
-class TutorialWebWallet extends ArweaveWebWallet {
-  constructor(appInfo, url) {
-    super(appInfo, url);
-    this.keepPopup = false;
-    this.on('connect', (address) => {
-      console.log(`connect: ${address}`);
-    });
-  }
-}
 
 export const WalletSelectButton = (props) => {
   const [showModal, setShowModal] = React.useState(false);
   const [activeWallet, setActiveWalelt] = React.useState(NONE);
   const [addressText, setAddressText] = React.useState("xxxxx...xxx");
-  const [webWallet, setWebWallet] = React.useState(null);
-
-  useEffect(() =>  {
-    console.log('Instantiating wallet');
-    setWebWallet(new TutorialWebWallet({
-      name: 'PublicSquare Tutorial',
-      logo: 'https://jfbeats.github.io/ArweaveWalletConnector/placeholder.svg',
-    }, 'arweave.app'))
-  }, [])
 
   async function onWalletSelected(walletName) {
     let address = await window.arweaveWallet.getActiveAddress();
@@ -44,7 +30,7 @@ export const WalletSelectButton = (props) => {
   return (
     <>
       <WalletButton onClick={() => setShowModal(true)} walletName={activeWallet} walletAddress={addressText} />
-      {showModal && <WalletModal wallet={webWallet} onClose={() => setShowModal(false)} onConnected={walletName => onWalletSelected(walletName)} />}
+      {showModal && <WalletModal onClose={() => setShowModal(false)} onConnected={walletName => onWalletSelected(walletName)} />}
     </>
   );
 };
@@ -75,7 +61,7 @@ const WalletModal = (props) => {
         await window.arweaveWallet.connect(['ACCESS_ADDRESS','SIGN_TRANSACTION']);
         break;
       case ARWEAVE_APP:
-        if (props.wallet.address === undefined) { await props.wallet.connect(); }
+        if (webWallet.address === undefined) { await webWallet.connect(); }
         break;
       default:
         throw new Error(`Attempted to connect unknown wallet ${walletName}`);

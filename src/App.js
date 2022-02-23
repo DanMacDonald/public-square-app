@@ -20,7 +20,7 @@ async function waitForNewPosts(txid) {
     console.log(`attempt ${count}`);
     await delay(2000 * count);
     posts = await getPosts();
-    foundPost = posts.find(p => p.height === -1 && p.txid === txid);
+    foundPost = posts.find(p => p.txid === txid);
   }
 
   let i = posts.indexOf(foundPost);
@@ -69,12 +69,12 @@ const App = () => {
         <main>
           <Routes>
             <Route path="/" name="home" element={
-              <Home 
-                isWalletConnected={isWalletConnected}
-                isSearching={isSearching}
-                postItems={postItems}
-                onPostMessage={waitForPost}
-              />}
+            <Home 
+              isWalletConnected={isWalletConnected}
+              isSearching={isSearching}
+              postItems={postItems}
+              onPostMessage={waitForPost}
+            />}
             />
             <Route path="/topics" element={<Topics />}>
               <Route path="/topics/" element={<TopicSearch />} />

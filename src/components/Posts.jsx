@@ -16,6 +16,38 @@ const PostItem = (props) => {
   const [postMessage, setPostMessage] = React.useState('s'.repeat(Math.max(props.postInfo.length - 75, 0)));
   const [statusMessage, setStatusMessage] = React.useState("");
 
+  React.useEffect(() => {
+    let newPostMessage = "";
+    let newStatus = "";
+    
+    if (!props.postInfo.message) {
+      setStatusMessage("loading...");
+      let isCancelled = false;
+
+      const getPostMessage = async () => {
+        const response = await props.postInfo.request;
+        if (!response) {
+          newStatus = props.postInfo.error;
+        } else if (response.status && response.status === 200) {
+          props.postInfo.message = response.data;
+          newStatus = "";
+          newPostMessage = response.data;
+        } else {
+          newStatus = "missing data";
+        }
+
+        if (isCancelled)
+          return;
+        setStatusMessage(newStatus);
+        setPostMessage(newPostMessage);
+      }
+
+      getPostMessage();
+      return () => isCancelled = true;
+    }
+    
+  }, [props.postInfo]);
+
   return (
     <div className="postItem">
       <div className="postLayout">

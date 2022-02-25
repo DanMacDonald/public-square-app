@@ -1,11 +1,5 @@
 import React, { useEffect } from 'react';
-import { ArweaveWebWallet } from 'arweave-wallet-connector';
 import "./walletSelectButton.css";
-
-const webWallet = new ArweaveWebWallet({
-  name: 'PublicSquare Tutorial',
-  logo: 'https://jfbeats.github.io/ArweaveWalletConnector/placeholder.svg',
-}, 'arweave.app');
 
 const NONE = "None";
 const AR_CONNECT = "ArConnect";
@@ -58,10 +52,10 @@ const WalletModal = (props) => {
   async function connectWallet(walletName) {
     switch(walletName) {
       case AR_CONNECT:
-        await window.arweaveWallet.connect(['ACCESS_ADDRESS','SIGN_TRANSACTION']);
+
         break;
       case ARWEAVE_APP:
-        await webWallet.connect();
+
         break;
       default:
         throw new Error(`Attempted to connect unknown wallet ${walletName}`);

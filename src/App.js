@@ -7,10 +7,10 @@ import { Posts } from './components/Posts';
 import { ProgressSpinner } from './components/ProgressSpinner';
 import { TopicSearch } from './components/TopicSearch';
 import { UserSearch } from './components/UserSearch';
-import { arweave, buildQuery, createPostData, delay, delayResults } from './lib/api';
+import { arweave, buildQuery, createPostInfo, delay, delayResults } from './lib/api';
 import './App.css';
 
-async function waitForNewPosts(txid) {
+async function waitForUpdatedPosts(txid) {
   let count = 0;
   let foundPost = null;
   let posts = [];
@@ -19,7 +19,7 @@ async function waitForNewPosts(txid) {
     count += 1;
     console.log(`attempt ${count}`);
     await delay(2000 * count);
-    posts = await getPosts();
+    posts = await getPostInfos();
     foundPost = posts.find(p => p.txid === txid);
   }
 
@@ -28,7 +28,7 @@ async function waitForNewPosts(txid) {
   return posts;
 }
 
-async function getPosts(ownerAddress, topic) {
+async function getPostInfos(ownerAddress, topic) {
   const query = buildQuery({address: ownerAddress, topic});
   const results = await arweave.api.post('/graphql', query)
     .catch(err => {
@@ -36,25 +36,25 @@ async function getPosts(ownerAddress, topic) {
       throw new Error(err);
     });
   const edges = results.data.data.transactions.edges;
-  return await delayResults(100,edges.map(edge => createPostData(edge.node)));
+  return await delayResults(100,edges.map(edge => createPostInfo(edge.node)));
 }
 
 const App = () => {
   const [isWalletConnected, setIsWalletConnected] = React.useState(false);
-  const [postItems, setPostItems] = React.useState([]);
+  const [postInfos, setPostInfos] = React.useState([]);
   const [isSearching, setIsSearching] = React.useState(false);
 
   async function waitForPost(txid) {
     setIsSearching(true)
-    let items = await waitForNewPosts(txid);
-    setPostItems(items)
+    let posts = await waitForUpdatedPosts(txid);
+    setPostInfos(posts)
     setIsSearching(false);
   }
 
   React.useEffect(() => {
     setIsSearching(true)
-    getPosts().then(items => { 
-      setPostItems(items);
+    getPostInfos().then(posts => { 
+      setPostInfos(posts);
       setIsSearching(false);
     });
   }, [])
@@ -72,7 +72,7 @@ const App = () => {
             <Home 
               isWalletConnected={isWalletConnected}
               isSearching={isSearching}
-              postItems={postItems}
+              postInfos={postInfos}
               onPostMessage={waitForPost}
             />}
             />
@@ -97,7 +97,7 @@ const Home = (props) => {
       <header>Home</header>
       <NewPost isLoggedIn={props.isWalletConnected} onPostMessage={props.onPostMessage} />
       {props.isSearching && <ProgressSpinner />}
-      <Posts postItems={props.postItems} />
+      <Posts postInfos={props.postInfos} />
     </>
   );
 };
@@ -121,7 +121,7 @@ const Users = () => {
 };
 
 const TopicResults = () => {
-  const [topicPostItems, setTopicPostitems] = React.useState([]);
+  const [topicPostInfos, setTopicPostInfos] = React.useState([]);
   const [isSearching, setIsSearching] = React.useState(false);
   const { topic } = useParams();
   const navigate = useNavigate();
@@ -132,10 +132,10 @@ const TopicResults = () => {
 
   React.useEffect(() => {
     setIsSearching(true);
-    setTopicPostitems([]);
+    setTopicPostInfos([]);
     try {
-      getPosts(null,topic).then(items => { 
-        setTopicPostitems(items);
+      getPostInfos(null,topic).then(posts => { 
+        setTopicPostInfos(posts);
         setIsSearching(false);
       });
     } catch (error) {
@@ -147,13 +147,13 @@ const TopicResults = () => {
     <>
     <TopicSearch searchInput={topic} onSearch={onTopicSearch}/>
     {isSearching && <ProgressSpinner />}
-    <Posts postItems={topicPostItems} />
+    <Posts postInfos={topicPostInfos} />
     </>
   )
 }
 
 function UserResults() {
-  const [userPostItems, setUserPostItems] = React.useState([]);
+  const [userPostInfos, setUserPostInfos] = React.useState([]);
   const [isSearching, setIsSearching] = React.useState(false);
   const { addr } = useParams();
   const navigate = useNavigate();
@@ -165,8 +165,8 @@ function UserResults() {
   React.useEffect(() => {
     setIsSearching(true);
     try {
-      getPosts(addr).then(items => { 
-        setUserPostItems(items); 
+      getPostInfos(addr).then(posts => { 
+        setUserPostInfos(posts); 
         setIsSearching(false);
       });
     } catch (error) {
@@ -178,7 +178,7 @@ function UserResults() {
     <>
     <UserSearch searchInput={addr} onSearch={onUserSearch}/>
     {isSearching && <ProgressSpinner />}
-    <Posts postItems={userPostItems} />
+    <Posts postInfos={userPostInfos} />
     </>
   );
 };

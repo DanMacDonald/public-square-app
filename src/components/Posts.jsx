@@ -5,31 +5,31 @@ import { abbreviateAddress, getPostTime } from '../lib/api';
 export const Posts = (props) => {
   return (
     <div>
-      {props.postItems.map(item =>
-        <PostItem key={item.txid} item={item} />
+      {props.postInfos.map(postInfo =>
+        <PostItem key={postInfo.txid} postInfo={postInfo} />
       )}
     </div>
   )
 };
 
 const PostItem = (props) => {
-  const [postMessage, setPostMessage] = React.useState('s'.repeat(Math.max(props.item.length - 75, 0)));
+  const [postMessage, setPostMessage] = React.useState('s'.repeat(Math.max(props.postInfo.length - 75, 0)));
   const [statusMessage, setStatusMessage] = React.useState("");
 
   React.useEffect(() => {
     let newPostMessage = "";
     let newStatus = "";
     
-    if (!props.item.message) {
+    if (!props.postInfo.message) {
       setStatusMessage("loading...");
       let isCancelled = false;
 
-      const getMessage = async () => {
-        const response = await props.item.request;
+      const getPostMessage = async () => {
+        const response = await props.postInfo.request;
         if (!response) {
-          newStatus = props.item.error;
+          newStatus = props.postInfo.error;
         } else if (response.status && response.status === 200) {
-          props.item.message = response.data;
+          props.postInfo.message = response.data;
           newStatus = "";
           newPostMessage = response.data;
         } else {
@@ -42,11 +42,11 @@ const PostItem = (props) => {
         setPostMessage(newPostMessage);
       }
 
-      getMessage();
+      getPostMessage();
       return () => isCancelled = true;
     }
     
-  }, [props.item]);
+  }, [props.postInfo]);
 
   const renderTopic = (topic) => {
     if (topic)
@@ -59,15 +59,15 @@ const PostItem = (props) => {
         <img className="profileImage" src="img_avatar.png" alt="ProfileImage" />
         <div>
           <div className="postOwnerRow">
-            <Link to={`/users/${props.item.owner}`}>{abbreviateAddress(props.item.owner)}</Link>
+            <Link to={`/users/${props.postInfo.owner}`}>{abbreviateAddress(props.postInfo.owner)}</Link>
             <span className="gray"> • </span>
-            <time>{getPostTime(props.item.timestamp)}</time>
+            <time>{getPostTime(props.postInfo.timestamp)}</time>
           </div>
           <div className="postRow">
-            {props.item.message || postMessage}
+            {props.postInfo.message || postMessage}
             {statusMessage && <div className="status"> {statusMessage}</div>}
           </div>
-          {renderTopic(props.item.topic)}
+          {renderTopic(props.postInfo.topic)}
         </div>
       </div>
     </div>

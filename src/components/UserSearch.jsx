@@ -2,6 +2,12 @@ import { SearchInput } from './SearchInput'
 import { useNavigate } from 'react-router-dom';
 import { isWellFormattedAddress } from '../lib/api';
 
+/**
+ * Template component that initializes the "User Search" panel to include a
+ * wallet icons and search input field that validates arweave addresses and 
+ * redirects to the appropriate `/users/{address}` route to display the results
+ * when the user clicks the "Search" button in the <SearchInput /> component.
+ */
 export const UserSearch = (props) => {
 	const navigate = useNavigate();
 	const onUserSearch = (address) => {

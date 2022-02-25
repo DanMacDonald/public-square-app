@@ -1,6 +1,6 @@
 import React from 'react'
 import TextareaAutosize from 'react-textarea-autosize';
-import { arweave, getTopicString } from '../lib/api';
+import { getTopicString } from '../lib/api';
 
 export const NewPost = (props) => {
   const [topicValue, setTopicValue] = React.useState("");
@@ -13,39 +13,6 @@ export const NewPost = (props) => {
   }
 
   async function onPostButtonClicked() {
-    setIsPosting(true);
-    let tx = await arweave.createTransaction({ data:postValue })
-
-    tx.addTag('App-Name', 'PublicSquare')
-    tx.addTag('Content-Type', 'text/plain')
-    tx.addTag('Version', '1')
-    tx.addTag('Type', 'post')
-
-    if(topicValue) {
-      tx.addTag('Topic', topicValue);
-    }
-    
-    try {
-      let err = await arweave.transactions.sign(tx);
-      if (err) {
-        console.log(err.message);
-        setIsPosting(false);
-        return;
-      } 
-    } catch (err) {
-      console.log(err);
-      setIsPosting(false);
-      return;
-    }
-    
-    const response = await arweave.transactions.post(tx);
-    console.log(response);
-    setIsPosting(false);
-    setPostValue("");
-    setTopicValue("");
-    if (props.onPostMessage) {
-      props.onPostMessage(tx.id);
-    }
   }
 
   let isDisabled = postValue === "";

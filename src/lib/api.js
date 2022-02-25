@@ -1,5 +1,3 @@
-import Arweave from 'arweave';
-export const arweave = Arweave.init({});
 
 export const isWellFormattedAddress = (input) => {
   const re = /^[a-zA-Z0-9_]{43}$/;

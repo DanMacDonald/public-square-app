@@ -20,59 +20,8 @@ export const createPostInfo = (node) => {
   return postInfo;
 }
 
-export const buildQuery = ({count, address, topic}) => {
-  
-  count = Math.min(100, count || 100);
-  
-  let ownersFilter = '';
-  if (address) {
-    ownersFilter = `owners: ["${address}"],`
-  }
-
-  let topicFilter = '';
-  if (topic) {
-    topicFilter = `{
-      name: "Topic",
-      values: ["${topic}"]
-    },`
-  }
-
-  const queryObject = { query: `{
-    transactions(first: ${count}, ${ownersFilter}
-      tags: [
-        {
-          name: "App-Name",
-          values: ["PublicSquare"]
-        },
-        {
-          name: "Content-Type",
-          values: ["text/plain"]
-        },
-        ${topicFilter}
-      ]
-    ) {
-      edges {
-        node {
-          id
-          owner {
-            address
-          }
-          data {
-            size
-          }
-          block {
-            height
-            timestamp
-          }
-          tags {
-            name,
-            value
-          }
-        }
-      }
-    }
-  }`}
-  console.log(queryObject.query);
+export const buildQuery = () => {
+  const queryObject = {}
   return queryObject;
 }
 

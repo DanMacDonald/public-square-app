@@ -3,14 +3,8 @@ import TextareaAutosize from 'react-textarea-autosize';
 import { getTopicString } from '../lib/api';
 
 export const NewPost = (props) => {
-  const [topicValue, setTopicValue] = React.useState("");
   const [postValue, setPostValue] = React.useState("");
   const [isPosting, setIsPosting] = React.useState(false);
-  function onTopicChanged(e) {
-    let input = e.target.value;
-    let dashedTopic = getTopicString(input);
-    setTopicValue(dashedTopic);
-  }
 
   async function onPostButtonClicked() {
   }
@@ -27,7 +21,7 @@ export const NewPost = (props) => {
             readOnly={true}
           />
           <div className="newPost-postRow">
-          <div className="topic">
+          {/* <div className="topic">
               # 
               <input
                 type="text" 
@@ -36,7 +30,7 @@ export const NewPost = (props) => {
                 value={topicValue}
                 disabled={true}
               />
-            </div>
+            </div> */}
             <div >
               <button 
                 className="submitButton"
@@ -58,7 +52,7 @@ export const NewPost = (props) => {
             placeholder="What do you have to say?" 
           />
           <div className="newPost-postRow">
-            <div className="topic"
+            {/* <div className="topic"
               style={{color: topicValue  && "rgb( 80, 162, 255)" }}
             >
               # 
@@ -69,7 +63,7 @@ export const NewPost = (props) => {
                 value={topicValue}
                 onChange={e => onTopicChanged(e)}
               />
-            </div>
+            </div> */}
             <div >
               <button 
                 className="submitButton"

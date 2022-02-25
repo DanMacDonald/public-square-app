@@ -49,7 +49,6 @@ const Home = (props) => {
   return (
     <>
       <header>Home</header>
-      {props.isSearching && <ProgressSpinner />}
     </>
   );
 };

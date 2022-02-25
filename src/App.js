@@ -1,38 +1,22 @@
 import React from 'react';
 import { Routes, Route, Outlet, useParams, useNavigate } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
-import { WalletSelectButton } from './components/WalletSelectButton';
-import { NewPost } from './components/NewPost';
 import { Posts } from './components/Posts';
 import { ProgressSpinner } from './components/ProgressSpinner';
 import { TopicSearch } from './components/TopicSearch';
 import { UserSearch } from './components/UserSearch';
-import { arweave, buildQuery, createPostInfo, delay, delayResults } from './lib/api';
 import './App.css';
-
-async function waitForUpdatedPosts(txid) {
-  let count = 0;
-  let foundPost = null;
-  let posts = [];
-
-  while (!foundPost) {
-    count += 1;
-    console.log(`attempt ${count}`);
-    await delay(2000 * count);
-    posts = await getPostInfos();
-    foundPost = posts.find(p => p.txid === txid);
-  }
-
-  let i = posts.indexOf(foundPost);
-  posts.unshift(posts.splice(i,1)[0]);
-  return posts;
-}
 
 async function getPostInfos() {
   return [];
 }
 
 const App = () => {
+  
+  React.useEffect(() => {
+    getPostInfos();
+  }, [])
+
   return (
     <div id="app">
       <div id="content">

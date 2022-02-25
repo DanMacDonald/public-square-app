@@ -28,52 +28,22 @@ async function waitForUpdatedPosts(txid) {
   return posts;
 }
 
-async function getPostInfos(ownerAddress, topic) {
-  const query = buildQuery({address: ownerAddress, topic});
-  const results = await arweave.api.post('/graphql', query)
-    .catch(err => {
-      console.error('GraphQL query failed', err);
-      throw new Error(err);
-    });
-  const edges = results.data.data.transactions.edges;
-  return await delayResults(100,edges.map(edge => createPostInfo(edge.node)));
+async function getPostInfos() {
+  return [];
 }
 
 const App = () => {
-  const [isWalletConnected, setIsWalletConnected] = React.useState(false);
-  const [postInfos, setPostInfos] = React.useState([]);
-  const [isSearching, setIsSearching] = React.useState(false);
-
-  async function waitForPost(txid) {
-    setIsSearching(true)
-    let posts = await waitForUpdatedPosts(txid);
-    setPostInfos(posts)
-    setIsSearching(false);
-  }
-
-  React.useEffect(() => {
-    setIsSearching(true)
-    getPostInfos().then(posts => { 
-      setPostInfos(posts);
-      setIsSearching(false);
-    });
-  }, [])
-
   return (
     <div id="app">
       <div id="content">
         <aside>
           <Navigation />
-          <WalletSelectButton onWalletConnect={() => setIsWalletConnected(true)} />
         </aside>
         <main>
           <Routes>
             <Route path="/" name="home" element={
             <Home 
-              isWalletConnected={isWalletConnected}
-              isSearching={isSearching}
-              postInfos={postInfos}
-              onPostMessage={waitForPost}
+
             />}
             />
             <Route path="/topics" element={<Topics />}>
@@ -95,9 +65,7 @@ const Home = (props) => {
   return (
     <>
       <header>Home</header>
-      <NewPost isLoggedIn={props.isWalletConnected} onPostMessage={props.onPostMessage} />
       {props.isSearching && <ProgressSpinner />}
-      <Posts postInfos={props.postInfos} />
     </>
   );
 };

@@ -15,14 +15,10 @@ export const createPostInfo = (node) => {
   const postInfo = {
     txid: node.id,
     owner: ownerAddress,
-    topic: topic,
     height: height,
     length: node.data.size,
     timestamp: timestamp,
-    request: null,
   }
-  postInfo.request = arweave.api.get(`/${node.id}`, { timeout: 10000 })
-    .catch(() => { postInfo.error = "timeout loading data"});
   return postInfo;
 }
 

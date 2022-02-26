@@ -26,7 +26,7 @@ export const createPostInfo = (node) => {
   return postInfo;
 }
 
-export const buildQuery = ({count, address, topic}) => {
+export const buildQuery = ({count, address, topic} = {}) => {
   
   count = Math.min(100, count || 100);
   

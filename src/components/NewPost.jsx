@@ -24,28 +24,19 @@ export const NewPost = (props) => {
     if(topicValue) {
       tx.addTag('Topic', topicValue);
     }
-    
+
     try {
-      let err = await arweave.transactions.sign(tx);
-      if (err) {
-        console.log(err.message);
-        setIsPosting(false);
-        return;
-      } 
+      let result = await window.arweaveWallet.dispatch(tx);
+      console.log(result);
+      setPostValue("");
+      setTopicValue("");
+      if (props.onPostMessage) {
+        props.onPostMessage(result.id);
+      }
     } catch (err) {
-      console.log(err);
-      setIsPosting(false);
-      return;
+      console.error(err);
     }
-    
-    const response = await arweave.transactions.post(tx);
-    console.log(response);
     setIsPosting(false);
-    setPostValue("");
-    setTopicValue("");
-    if (props.onPostMessage) {
-      props.onPostMessage(tx.id);
-    }
   }
 
   let isDisabled = postValue === "";

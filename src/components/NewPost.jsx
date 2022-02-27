@@ -18,13 +18,11 @@ export const NewPost = (props) => {
 
     tx.addTag('App-Name', 'PublicSquare')
     tx.addTag('Content-Type', 'text/plain')
-    tx.addTag('Version', '1')
+    tx.addTag('Version', '1.0.1')
     tx.addTag('Type', 'post')
-
     if(topicValue) {
       tx.addTag('Topic', topicValue);
     }
-
     try {
       let result = await window.arweaveWallet.dispatch(tx);
       console.log(result);

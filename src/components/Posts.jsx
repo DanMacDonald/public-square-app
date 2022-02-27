@@ -28,7 +28,7 @@ const PostItem = (props) => {
         const response = await props.postInfo.request;
         if (!response) {
           newStatus = props.postInfo.error;
-        } else if (response.status && response.status === 200) {
+        } else if (response.status && (response.status === 200 || response.status === 202)) {
           props.postInfo.message = response.data;
           newStatus = "";
           newPostMessage = response.data;

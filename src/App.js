@@ -64,7 +64,7 @@ const App = () => {
       <div id="content">
         <aside>
           <Navigation />
-          <WalletSelectButton onWalletConnect={() => setIsWalletConnected(true)} />
+          <WalletSelectButton setIsConnected={value => setIsWalletConnected(value)} />
         </aside>
         <main>
           <Routes>

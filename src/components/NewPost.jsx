@@ -1,6 +1,6 @@
 import React from 'react'
 import TextareaAutosize from 'react-textarea-autosize';
-import { getTopicString } from '../lib/api';
+import { arweave, getTopicString } from '../lib/api';
 
 export const NewPost = (props) => {
   const [postValue, setPostValue] = React.useState("");

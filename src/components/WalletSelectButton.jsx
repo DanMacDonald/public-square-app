@@ -67,7 +67,7 @@ const WalletModal = (props) => {
   async function connectWallet(walletName) {
     switch(walletName) {
       case AR_CONNECT:
-        await window.arweaveWallet.connect(['ACCESS_ADDRESS','SIGN_TRANSACTION']);
+        await window.arweaveWallet.connect(['ACCESS_ADDRESS','SIGN_TRANSACTION','DISPATCH']);
         break;
       case ARWEAVE_APP:
         await webWallet.connect();

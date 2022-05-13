@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { abbreviateAddress, getPostTime } from '../lib/api';
+import { maxMessageLength, abbreviateAddress, getPostTime } from '../lib/api';
 
 export const Posts = (props) => {
   return (
@@ -13,7 +13,7 @@ export const Posts = (props) => {
 };
 
 const PostItem = (props) => {
-  const [postMessage, setPostMessage] = React.useState('s'.repeat(Math.max(props.postInfo.length - 75, 0)));
+  const [postMessage, setPostMessage] = React.useState("");
   const [statusMessage, setStatusMessage] = React.useState("");
 
   React.useEffect(() => {
@@ -25,24 +25,38 @@ const PostItem = (props) => {
       let isCancelled = false;
 
       const getPostMessage = async () => {
+        setPostMessage('s'.repeat(Math.min(Math.max(props.postInfo.length - 75, 0), maxMessageLength)));
         const response = await props.postInfo.request;
-        if (!response) {
-          newStatus = props.postInfo.error;
-        } else if (response.status && (response.status === 200 || response.status === 202)) {
-          props.postInfo.message = response.data;
-          newStatus = "";
-          newPostMessage = response.data;
-        } else {
-          newStatus = "missing data";
+        switch (response?.status) {
+          case 200:
+          case 202:
+            props.postInfo.message = response.data.toString();
+            newStatus = "";
+            newPostMessage = props.postInfo.message;
+            break;
+          case 404:
+            newStatus = "Not Found";
+            break;
+          default:
+            newStatus = props.postInfo?.error;
+            if(!newStatus) {
+              newStatus = "missing data";
+            }
         }
 
         if (isCancelled)
           return;
-        setStatusMessage(newStatus);
+
         setPostMessage(newPostMessage);
+        setStatusMessage(newStatus);
       }
 
-      getPostMessage();
+      if (props.postInfo.error) {
+        setPostMessage("");
+        setStatusMessage(props.postInfo.error);
+      } else {
+        getPostMessage();
+      }
       return () => isCancelled = true;
     }
     

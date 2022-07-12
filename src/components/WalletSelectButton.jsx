@@ -7,7 +7,7 @@ const ARWEAVE_APP = "ArweaveApp";
 
 export const WalletSelectButton = (props) => {
   const [showModal, setShowModal] = React.useState(false);
-  const [activeWallet, setActiveWalelt] = React.useState(NONE);
+  const [activeWallet, setActiveWallet] = React.useState(NONE);
   const [addressText, setAddressText] = React.useState("xxxxx...xxx");
 
   async function onWalletSelected(walletName) {
@@ -18,7 +18,7 @@ export const WalletSelectButton = (props) => {
       setAddressText(`${firstFive}..${lastFour }`);
       props.onWalletConnect();
     }
-    setActiveWalelt(walletName);
+    setActiveWallet(walletName);
   }
 
   return (

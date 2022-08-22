@@ -7,7 +7,7 @@ const ARWEAVE_APP = "ArweaveApp";
 
 export const WalletSelectButton = (props) => {
   const [showModal, setShowModal] = React.useState(false);
-  const [activeWallet, setActiveWalelt] = React.useState(NONE);
+  const [activeWallet, setActiveWallet] = React.useState(NONE);
   const [addressText, setAddressText] = React.useState("xxxxx...xxx");
 
   async function onWalletSelected(walletName) {
@@ -16,15 +16,24 @@ export const WalletSelectButton = (props) => {
       const firstFive = address.substring(0,5);
       const lastFour = address.substring(address.length-4);
       setAddressText(`${firstFive}..${lastFour }`);
-      props.onWalletConnect();
+      props.setIsConnected(true);
     }
-    setActiveWalelt(walletName);
+    setActiveWallet(walletName);
+  }
+
+  async function onWalletDisconnected() {
+    setActiveWallet(NONE);
+    props.setIsConnected(false);
   }
 
   return (
     <>
       <WalletButton onClick={() => setShowModal(true)} walletName={activeWallet} walletAddress={addressText} />
-      {showModal && <WalletModal onClose={() => setShowModal(false)} onConnected={walletName => onWalletSelected(walletName)} />}
+      {showModal && <WalletModal 
+        onClose={() => setShowModal(false)} 
+        onConnected={walletName => onWalletSelected(walletName)}
+        onDisconnected={() => onWalletDisconnected()}
+      />}
     </>
   );
 };

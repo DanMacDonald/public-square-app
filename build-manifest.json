@@ -1,0 +1,23 @@
+{
+"manifest": "arweave/paths",
+"version": "0.1.0",
+"paths": {
+"static/js/main.0706965a.js.LICENSE.txt":{"id":"BGIUT8Phn00bOkYTrA7kN0JlR6TutjdfbUYlxUtP9oM"},
+"logo192.png":{"id":"a17gWph8DdFXxcx6jtFRJcIwb9l-BpC4Y9FtiSZt2RY"},
+"asset-manifest.json":{"id":"MYTqi7WulIbdy_EF93b1OcIx_SOQoLVdMEvIBrzqEgQ"},
+"static/css/main.bdc011ec.css":{"id":"v7hZFwc5KoKEb1NTENUs3vyZnhamoIG8w_eSmOv0pbk"},
+"robots.txt":{"id":"foB-2GYOQ07MLv94D2I0RsugUsEemOIR07nix2V0Ifs"},
+"index.html":{"id":"ZGk4DPr5DeOu3eHclh7F_ytuyGpqXFMB26CxWkhEisk"},
+"img_avatar.png":{"id":"JUQ4HAKkC3Ffh8vPeF7xDKr6io6JgOIxwQlM2Xa3Mfw"},
+"elephant.svg":{"id":"ePhDzcJIcGvT1evySuca3oG8Zt2ojROx5mp5On0UEkc"},
+"favicon.ico":{"id":"uaDejjiKeGKpShM_BB6dAXUJVXebycpgdxolfBKpn4I"},
+"manifest.json":{"id":"1El9hvcxWYT4nIv72sgZN5Jxo2G2BpporfTZhd2HwDw"},
+"ArweaveApp_Logo.svg":{"id":"Bf0fz3jxda12tFXyPzwbt5A30a5UdlkWRpGx9FdbSTQ"},
+"static/css/main.bdc011ec.css.map":{"id":"93r31Qu9oQA3wCrTb5wADwN6GuYuCBcVWZxydZYQdLY"},
+"ArConnect_Logo.png":{"id":"sIHwZR_YK6vR_xYQIzwDtQeuXZE8JAesThX46wnkwNY"},
+"logo512.png":{"id":"rC-SKBrLIfqhhBiXdLWn_AuLwyIW3hybPtEEYnav8-8"},
+"static/js/main.0706965a.js":{"id":"VLnGjP1BashNpKX7NhdgK01C2mY77z5ZilqRLAPBpLA"},
+"static/js/main.0706965a.js.map":{"id":"w7y1Ai7pAp2uWEukjliGoKZ4oY8HrPd1YsOI_pW-F6s"}
+},
+"index":{"path":"index.html"}
+}

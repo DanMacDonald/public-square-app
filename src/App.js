@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route, Outlet, useParams, useNavigate } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import { WalletSelectButton } from './components/WalletSelectButton';
+import { ProfileButton } from './components/ProfileButton';
 import { NewPost } from './components/NewPost';
 import { Posts } from './components/Posts';
 import { ProgressSpinner } from './components/ProgressSpinner';
@@ -65,6 +66,7 @@ const App = () => {
         <aside>
           <Navigation />
           <WalletSelectButton setIsConnected={value => setIsWalletConnected(value)} />
+          <ProfileButton isWalletConnected={isWalletConnected} />
         </aside>
         <main>
           <Routes>

@@ -20,8 +20,8 @@ export const WalletSelectButton = (props) => {
     let address = await window.arweaveWallet.getActiveAddress();
     if (address) {
       const firstFive = address.substring(0,5);
-      const lastFour = address.substring(address.length-4);
-      setAddressText(`${firstFive}..${lastFour }`);
+      const lastFive = address.substring(address.length-5);
+      setAddressText(`${firstFive}...${lastFive }`);
       props.setIsConnected(true);
     }
     setActiveWallet(walletName);

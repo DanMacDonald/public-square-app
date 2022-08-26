@@ -1,5 +1,17 @@
 import Arweave from 'arweave';
-export const arweave = Arweave.init({});
+import Account from 'arweave-account';
+
+export const arweave = Arweave.init({
+    host: 'arweave.net',
+    port: 443,
+    protocol: 'https'
+  });
+
+export const account = new Account({
+  cacheIsActivated: true,
+  cacheSize: 150,
+  cacheTime: 3600000  // 3600000ms => 1 hour cache 
+});
 
 export const maxMessageLength = 1024;
 
@@ -17,6 +29,7 @@ export const createPostInfo = (node) => {
   const postInfo = {
     txid: node.id,
     owner: ownerAddress,
+    account: account.get(ownerAddress),
     topic: topic,
     height: height,
     length: node.data.size,
@@ -60,6 +73,10 @@ export const buildQuery = ({count, address, topic} = {}) => {
         {
           name: "Content-Type",
           values: ["text/plain"]
+        },
+        {
+          name: "Version",
+          values: ["1.0.1"]
         },
         ${topicFilter}
       ]
@@ -120,8 +137,8 @@ export const abbreviateAddress = (address) => {
   if (!address)
     return address;
   const firstFive = address.substring(0,5);
-  const lastFour = address.substring(address.length-4);
-  return `${firstFive}..${lastFour }`;
+  const lastFour = address.substring(address.length-5);
+  return `${firstFive}...${lastFour }`;
 }
 
 export const getTopicString = (input) => {

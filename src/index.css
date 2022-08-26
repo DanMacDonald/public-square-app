@@ -1,15 +1,16 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(27, 39, 51);
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: rgb(27, 39, 51);
 
 }
+
 :root {
-  --color-text: rgb(236, 233, 230);
+	--color-text: rgb(236, 233, 230);
 }
 
 /* Navigation =============================================================== */
@@ -17,18 +18,19 @@ nav {
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
+	margin-top: 1rem;
 }
 
 nav a {
 	font-size: 1.25rem;
-  line-height: 1.75rem;
+	line-height: 1.75rem;
 	text-decoration: none;
 	padding: 0.75rem;
 	border-radius: 9999px;
 	display: inline-flex;
 	align-items: center;
 	box-sizing: border-box;
-  border-width: 0;
+	border-width: 0;
 }
 
 nav a:hover {
@@ -38,7 +40,7 @@ nav a:hover {
 svg {
 	width: 2rem;
 	height: 2rem;
-  color: rgb(236, 233, 230);
+	color: rgb(236, 233, 230);
 }
 
 .navLabel {
@@ -47,15 +49,15 @@ svg {
 }
 
 .navHeader {
-  display: flex;
+	display: flex;
 	flex-direction: row;
 	align-items: stretch;
-  margin-left: 0.7rem;
-  height: 3rem;
+	margin-left: 0.7rem;
+	height: 3rem;
 }
 
 .navHeader svg {
-  color: rgb(85, 99, 116);
+	color: rgb(85, 99, 116);
 }
 
 /* NewPost ================================================================== */
@@ -66,8 +68,8 @@ textarea {
 	padding: 0px;
 	margin-bottom: 0.75rem;
 	font-size: 1.25rem;
-  line-height: 1.75rem;
-	height:28px;
+	line-height: 1.75rem;
+	height: 28px;
 	width: 100%;
 	background-color: transparent;
 	border-width: 0px;
@@ -77,7 +79,7 @@ textarea {
 }
 
 .newPost {
-  position: relative;
+	position: relative;
 	margin-top: 1rem;
 	padding-left: 2rem;
 	padding-left: 2rem;
@@ -94,21 +96,21 @@ textarea {
 
 .submitButton {
 	font-weight: 400;
-  border-radius: 0;
-  font-size: 18px;
-  justify-content: space-between;
+	border-radius: 0;
+	font-size: 18px;
+	justify-content: space-between;
 	width: 100%;
-  border: none;
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  font-weight: 600;
-  height: 48px;
-  line-height: 48px;
-  padding: 0 24px;
+	border: none;
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	font-weight: 600;
+	height: 48px;
+	line-height: 48px;
+	padding: 0 24px;
 	border-radius: 99999px;
 	height: 38px;
-  background-color: rgb(80, 162, 255);
+	background-color: rgb(80, 162, 255);
 	color: rgb(27, 39, 51);
 	cursor: pointer;
 }
@@ -116,7 +118,7 @@ textarea {
 .submitButton:disabled {
 	background-color: rgb(39, 50, 62);
 	color: rgba(219, 216, 213, 0.5);
-	cursor: default;	
+	cursor: default;
 }
 
 .topic {
@@ -137,23 +139,23 @@ textarea {
 	outline: none;
 	font-size: 1rem;
 	font-weight: 500;
-	color: rgb( 80, 162, 255);
+	color: rgb(80, 162, 255);
 	margin-left: 0.5rem;
 }
 
 .newPostScrim {
-  top: -1rem;
-  left: 0;
-  bottom: 0;
-  right:0;
-  position:absolute;
-  background-color: rgba(27, 39, 51, 0.75);
+	top: -1rem;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	position: absolute;
+	background-color: rgba(27, 39, 51, 0.75);
 }
 
 /* Posts ==================================================================== */
 .postItem {
 	padding-top: 1rem;
-  padding-bottom: 1rem;
+	padding-bottom: 1rem;
 	padding-left: 1rem;
 	padding-right: 2rem;
 	border-bottom: solid 1px rgb(39, 50, 62);
@@ -181,16 +183,16 @@ textarea {
 	font-weight: 400;
 	margin-left: 0.5rem;
 	width: 100%;
-	word-break:break-word;
-  line-height: 1.3rem;
+	word-break: break-word;
+	line-height: 1.3rem;
 }
 
 .profileImage {
 	width: 48px;
-  min-width: 48px;
-  height: 48px;
-  border-radius: 100%;
-  color: transparent;
+	min-width: 48px;
+	height: 48px;
+	border-radius: 100%;
+	color: transparent;
 	vertical-align: top;
 }
 
@@ -206,7 +208,14 @@ textarea {
 time {
 	color: rgb(85, 99, 116);
 	font-size: 0.875rem;
-  line-height: 1.25rem;
+	line-height: 1.25rem;
+	font-weight: 500;
+}
+
+.handle {
+	color: rgb(85, 99, 116);
+	font-size: 0.875rem;
+	line-height: 1.25rem;
 	font-weight: 500;
 }
 
@@ -214,11 +223,11 @@ time {
 	display: inline-block;
 	margin-top: 0.5rem;
 	background-color: transparent;
-	color: rgb( 80, 162, 255);
+	color: rgb(80, 162, 255);
 	padding: 0px;
 	font-weight: 500;
-  margin-left: 0.5rem;
-  width: 100%;
+	margin-left: 0.5rem;
+	width: 100%;
 	font-size: 1rem;
 	text-decoration: none;
 }
@@ -230,16 +239,17 @@ time {
 .status {
 	color: rgb(85, 99, 116);
 	font-size: 0.875rem;
-  line-height: 1.3rem;
+	line-height: 1.3rem;
 }
+
 #element::-webkit-scrollbar {
-  display: none;
+	display: none;
 }
 
 #element {
-  scrollbar-width: none;
+	scrollbar-width: none;
 }
 
 ::-webkit-scrollbar {
-  display: none;
+	display: none;
 }

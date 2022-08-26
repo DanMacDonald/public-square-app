@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route, Outlet, useParams, useNavigate } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import { WalletSelectButton } from './components/WalletSelectButton';
+import { ProfileButton } from './components/ProfileButton';
 import { Posts } from './components/Posts';
 import { ProgressSpinner } from './components/ProgressSpinner';
 import { TopicSearch } from './components/TopicSearch';

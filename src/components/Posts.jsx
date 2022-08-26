@@ -15,6 +15,9 @@ export const Posts = (props) => {
 const PostItem = (props) => {
   const [postMessage, setPostMessage] = React.useState("");
   const [statusMessage, setStatusMessage] = React.useState("");
+  const [ownerName, setOwnerName] = React.useState("");
+  const [ownerHandle, setOwnerHandle] = React.useState("");
+  const [imgSrc, setImgSrc] = React.useState(props.postInfo.imgSrc || 'img_avatar.png');
 
   React.useEffect(() => {
     let newPostMessage = "";
@@ -65,11 +68,11 @@ const PostItem = (props) => {
   return (
     <div className="postItem">
       <div className="postLayout">
-        <img className="profileImage" src="img_avatar.png" alt="ProfileImage" />
+      <img className="profileImage" src={imgSrc} alt="ProfileImage" />
         <div>
           <div className="postOwnerRow">
-            <Link to={`/users/${props.postInfo.owner}`}>{abbreviateAddress(props.postInfo.owner)}</Link>
-            <span className="gray"> • </span>
+            <Link to={`/users/${props.postInfo.owner}`}>{ownerName}</Link>
+            <span className="gray"> <span className="handle">{ownerHandle}</span> • </span>
             <time>{getPostTime(props.postInfo.timestamp)}</time>
           </div>
           <div className="postRow">

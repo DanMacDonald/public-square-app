@@ -1,0 +1,57 @@
+.profileButton {
+	background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-family: 'DM Sans', 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: default;
+  height: 65px;
+  line-height: 48px;
+	border-radius: 9999px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width:98%;
+	margin-bottom: 0.75em;
+	color: rgba(219, 216, 213, 0.5);
+}
+
+.profileButton:hover {
+	background-color: rgb(39, 50, 62);
+}
+
+.profileButton .content {
+	margin: 0.5em;
+	height: 50px;
+	display: flex;
+	flex-direction: row;
+	width:100%;
+}
+
+.profileButton .names {
+	display: flex;
+	flex-direction: column;
+	justify-content:  flex-start;
+	text-align: left;
+	line-height: 20px;
+	margin-left: 0.5em;
+	flex-grow: 1;
+}
+
+.profileButton p {
+	margin: 0;
+	font-weight: 600;
+	margin-top:0.3em;
+	margin-bottom: 0.3em;
+	height: 1em;
+	color: rgb(236, 233, 230);
+}
+
+.ellipse {
+	display: flex;
+	width: 25px;
+	font-size: large;
+	line-height: 40px;
+} 

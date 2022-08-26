@@ -210,6 +210,13 @@ time {
 	font-weight: 500;
 }
 
+.handle {
+	color: rgb(85, 99, 116);
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	font-weight: 500;
+}
+
 .postTopic {
 	display: inline-block;
 	margin-top: 0.5rem;

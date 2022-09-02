@@ -9,7 +9,7 @@ export const isWellFormattedAddress = (input) => {
 export const createPostInfo = (node) => {
   const ownerAddress = node.owner.address;
   const height = node.block ? node.block.height : -1;
-  const timestamp = node.block ? parseInt(node.block.timestamp, 10) * 1000 : -1;
+  const timestamp = node?.block?.timestamp ? parseInt(node.block.timestamp, 10) * 1000 : -1;
   const postInfo = {
     txid: node.id,
     owner: ownerAddress,

@@ -25,7 +25,7 @@ export const createPostInfo = (node) => {
   const height = node.block ? node.block.height : -1;
   const topicTag = node.tags && node.tags.find((a) => a.name === 'Topic');
   const topic = topicTag ? topicTag.value : null;
-  const timestamp = node.block ? parseInt(node.block.timestamp, 10) * 1000 : -1;
+  const timestamp = node?.block?.timestamp ? parseInt(node.block.timestamp, 10) * 1000 : -1;
   const postInfo = {
     txid: node.id,
     owner: ownerAddress,

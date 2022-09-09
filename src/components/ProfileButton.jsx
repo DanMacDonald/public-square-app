@@ -12,7 +12,7 @@ export const ProfileButton = (props) => {
 			const getAccount = async () => {
 				const activeAddress = await window.arweaveWallet.getActiveAddress();
 				const info = await account.get(activeAddress);
-				if (info.profile?.name?.length > 0) {
+				if (info.txid != null) {
 					setName(info.profile.name);
 					setHandle(info.handle);
 					setSrc(info.profile.avatarURL);
